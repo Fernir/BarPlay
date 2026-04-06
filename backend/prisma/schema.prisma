@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Difficulty {
+  BEGINNER
+  MEDIUM
+  ADVANCED
+}
+
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  username  String    @unique
+  password  String
+  role      Role      @default(USER)
+  songs     Song[]
+  likes     Like[]
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Song {
+  id          String     @id @default(cuid())
+  title       String
+  artist      String
+  lyrics      String
+  key         String
+  difficulty  Difficulty @default(MEDIUM)
+  authorId    String
+  viewCount   Int        @default(0)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  
+  author      User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  likes       Like[]
+  comments    Comment[]
+  view     View[]   // Связь с просмотрами по IP
+}
+
+model Like {
+  id      String @id @default(cuid())
+  userId  String
+  songId  String
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  songId    String
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+}
+
+model View {
+  id        String   @id @default(cuid())
+  songId    String
+  ip        String   // IP адрес
+  createdAt DateTime @default(now())
+
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@unique([songId, ip])  // Один IP - один просмотр песни
+  @@index([songId])
+  @@index([ip])
+  @@index([createdAt])
+}

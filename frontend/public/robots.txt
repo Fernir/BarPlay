@@ -1,0 +1,46 @@
+# robots.txt для Music Chords App
+
+# Основные настройки
+User-agent: *
+Allow: /
+Allow: /songs/
+Allow: /artists/
+
+# Запрещаем индексацию служебных страниц
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login/
+Disallow: /register/
+Disallow: /logout/
+Disallow: /edit/
+Disallow: /add/
+Disallow: /profile/
+
+# Запрещаем дублирующийся контент
+Disallow: /*?page=
+Disallow: /*?sort=
+Disallow: /*?order=
+Disallow: /*?search=
+
+# Для поисковых ботов Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+# Для Яндекса
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Для Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Для всех остальных ботов
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Карта сайта
+Sitemap: https://yourdomain.com/sitemap.xml

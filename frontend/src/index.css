@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Базовые стили для body */
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  /* Карточки */
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-colors border border-gray-100 dark:border-gray-700;
+  }
+  
+  /* Поля ввода */
+  .input {
+    @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 
+           text-gray-900 dark:text-gray-100 rounded-lg 
+           focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 
+           transition-colors;
+  }
+}
+
+/* Адаптивные утилиты */
+@layer utilities {
+  /* Для очень маленьких экранов (менее 400px) */
+  @media (min-width: 400px) {
+    .xs\:inline {
+      display: inline;
+    }
+  }
+}
+
+
+/* Анимации для модального окна */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.2s ease-out;
+}
