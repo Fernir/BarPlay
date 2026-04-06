@@ -21,7 +21,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, showAddButton = true }
             <Link to="/" className="flex items-center gap-2 shrink-0">
               <Music size={24} className="sm:w-8 sm:h-8 text-indigo-600 dark:text-indigo-400" />
               <h1 className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">
-                <span className="inline xs:hidden">Chordplay</span>
+                <span className="inline xs:hidden">BarPlay</span>
               </h1>
             </Link>
 

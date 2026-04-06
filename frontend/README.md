@@ -1,4 +1,4 @@
-# Chordplay
+# BarPlay
 
 React + Vite + TailwindCSS
 
