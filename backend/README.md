@@ -1,4 +1,4 @@
-# Chordplay API
+# BarPlay API
 
 NestJS + Prisma + PostgreSQL
 
